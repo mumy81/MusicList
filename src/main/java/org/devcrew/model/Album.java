@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -21,9 +22,8 @@ public class Album {
 	
 	@Id
 	@GeneratedValue
-	@Column(name="album_id")
-	private long albumId;
-	
+	@Column(name="id")
+	private long id;	
 	
 	private String name;
 	
@@ -38,12 +38,12 @@ public class Album {
 	@OneToMany(mappedBy="album")
 	private List<Track> tracks;
 		
-	public long getAlbumId() {
-		return albumId;
+	public long getId() {
+		return id;
 	}
 
-	public void setAlbumId(long albumId) {
-		this.albumId = albumId;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -69,7 +69,8 @@ public class Album {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
+	
+	@JsonIgnore
 	public List<Track> getTracks() {
 		return tracks;
 	}
@@ -80,11 +81,7 @@ public class Album {
 
 	@Override
 	public String toString() {
-		return "Album [name=" + name + ", artist=" + artist + ", date=" + date + ", tracks=" + tracks + "]";
+		return "Album [id=" + id + ", name=" + name + ", artist=" + artist + ", date=" + date + ", tracks=" + tracks
+				+ "]";
 	}
-	
-	
-	
-	
-
 }

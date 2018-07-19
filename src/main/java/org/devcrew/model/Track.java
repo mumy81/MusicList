@@ -17,8 +17,8 @@ import javax.persistence.Table;
 public class Track {
 	@Id
 	@GeneratedValue
-	@Column(name="track_id")
-	private long trackId;
+	@Column(name="id")
+	private long id;
 	@Column(name="name")
 	private String name;
 	@ManyToOne
@@ -42,10 +42,10 @@ public class Track {
 
 	
 	public long getTrackId() {
-		return trackId;
+		return id;
 	}
-	public void setTrackId(long trackId) {
-		this.trackId = trackId;
+	public void setTrackId(long id) {
+		this.id = id;
 	}
 	public List<Playlist> getPlaylists() {
 		return playlists;

@@ -9,13 +9,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="artist")
 public class Artist {
 	@Id
 	@GeneratedValue
-	@Column(name="artist_id")
-	private long artistId;
+	@Column(name="id")
+	private long id;
 	
 	@Column(name="name")
 	private String name;
@@ -30,11 +32,11 @@ public class Artist {
 	
 	
 	public long getArtistId() {
-		return artistId;
+		return id;
 	}
 
-	public void setArtistId(long artistId) {
-		this.artistId = artistId;
+	public void setArtistId(long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -52,9 +54,8 @@ public class Artist {
 	public void setAlbums(List<Album> albums) {
 		this.albums = albums;
 	}
-	
-	
-
+		
+	@JsonIgnore
 	public List<Track> getTracks() {
 		return tracks;
 	}
@@ -65,8 +66,10 @@ public class Artist {
 
 	@Override
 	public String toString() {
-		return "Artist [name=" + name + ", albums=" + albums + "]";
+		return "Artist [id=" + id + ", name=" + name + ", albums=" + albums + ", tracks=" + tracks + "]";
 	}
+
+	
 	
 	
 

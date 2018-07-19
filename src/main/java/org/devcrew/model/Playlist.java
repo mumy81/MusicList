@@ -1,8 +1,9 @@
 package org.devcrew.model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,37 +12,42 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 @Entity
 @Table(name="playlist")
 public class Playlist {
 
 	@Id
 	@GeneratedValue
-	@Column(name="playlist_id")
-	private long playlistId;
+	@Column(name="id")
+	private long id;
 	@Column(name="name")
 	private String name;
-	@ManyToOne
-	@JoinColumn(name="user_id")
+	@ManyToOne(cascade=CascadeType.MERGE)
+	@JoinColumn(name="user")
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private User user;
 	@ManyToMany(mappedBy = "playlists")
-	private List<Track> tracks;
+	private Set<Track> tracks;
 	@Column(name="create_date")
 	private Date createDate;
 
 	
-	public long getPlaylistId() {
-		return playlistId;
+	public long getId() {
+		return id;
 	}
 
-	public void setPlaylistId(long playlistId) {
-		this.playlistId = playlistId;
+	public void setId(long id) {
+		this.id = id;
 	}
-
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}
-
+	@JsonIgnore
 	public void setUser(User user) {
 		this.user = user;
 	}
@@ -62,19 +68,17 @@ public class Playlist {
 		this.name = name;
 	}
 
-	public List<Track> getTracks() {
+	public Set<Track> getTracks() {
 		return tracks;
 	}
 
-	public void setTracks(List<Track> tracks) {
+	public void setTracks(Set<Track> tracks) {
 		this.tracks = tracks;
 	}
 
 	@Override
 	public String toString() {
-		return "Playlist [name=" + name + ", tracks=" + tracks + ", createDate=" + createDate + "]";
+		return "Playlist [id=" + id + ", name=" + name + ", user=" + user + ", tracks=" + tracks + ", createDate="
+				+ createDate + "]";
 	}
-	
-	
-
 }
