@@ -22,22 +22,15 @@ public class Artist {
 	@Column(name="name")
 	private String name;
 	
+	@Column(name="surname")
+	private String surname;
+	
 	@OneToMany(mappedBy="artist")
 	private List<Album> albums;
 	
 	@OneToMany(mappedBy="artist")
 	private List<Track> tracks;
 
-	
-	
-	
-	public long getArtistId() {
-		return id;
-	}
-
-	public void setArtistId(long id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;
@@ -64,13 +57,26 @@ public class Artist {
 		this.tracks = tracks;
 	}
 
-	@Override
-	public String toString() {
-		return "Artist [id=" + id + ", name=" + name + ", albums=" + albums + ", tracks=" + tracks + "]";
+	
+	public long getId() {
+		return id;
 	}
 
-	
-	
-	
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	@Override
+	public String toString() {
+		return "Artist [id=" + id + ", name=" + name + "]";
+	}
 
 }

@@ -41,12 +41,7 @@ public class Track {
 	
 
 	
-	public long getTrackId() {
-		return id;
-	}
-	public void setTrackId(long id) {
-		this.id = id;
-	}
+	
 	public List<Playlist> getPlaylists() {
 		return playlists;
 	}

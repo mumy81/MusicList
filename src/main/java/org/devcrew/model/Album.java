@@ -53,7 +53,7 @@ public class Album {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	public Artist getArtist() {
 		return artist;
 	}
@@ -81,7 +81,7 @@ public class Album {
 
 	@Override
 	public String toString() {
-		return "Album [id=" + id + ", name=" + name + ", artist=" + artist + ", date=" + date + ", tracks=" + tracks
+		return "Album [id=" + id + ", name=" + name + ", date=" + date + ", tracks=" + tracks
 				+ "]";
 	}
 }

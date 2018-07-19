@@ -1,19 +1,17 @@
 package org.devcrew.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.devcrew.exception.LoginFailedException;
 import org.devcrew.model.Credentials;
 import org.devcrew.model.User;
 import org.devcrew.repository.UserRepository;
 import org.devcrew.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,7 +44,7 @@ public class UserController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public User loginUser(@RequestBody Credentials credentials, HttpServletResponse response)
-			throws UsernameNotFoundException, Exception {
+			throws LoginFailedException, UnsupportedEncodingException {
 		User resUser = new User();
 		if (userServiceImpl.login(credentials.getUsername(), credentials.getPassword()) == true) {
 			String token = credentials.getUsername() + ":" + credentials.getPassword();

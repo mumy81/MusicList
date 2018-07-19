@@ -18,9 +18,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	@Override
 	public Playlist addPlaylist(Playlist playlist, long userId) {
 		User userr = userRepository.findById(userId);
-		userr.getPlaylists().add(playlist);
-		System.out.println(userr);
-		System.out.println(userr.getPlaylists());		
+		userr.getPlaylists().add(playlist);	
 		userRepository.save(userr);
 		return playlist;
 	}

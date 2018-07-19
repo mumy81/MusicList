@@ -5,6 +5,7 @@ import java.util.List;
 import org.devcrew.model.Playlist;
 import org.devcrew.model.Track;
 import org.devcrew.repository.PlaylistRepository;
+import org.devcrew.repository.TrackRepository;
 import org.devcrew.service.PlaylistServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,19 +26,21 @@ public class PlaylistController {
 	@GetMapping("/all")
 	public List<Playlist> getAllPlaylist() {
 		return playlistRepository.findAll();
-
 	}
 
-	@RequestMapping(value = "/save/{user_id}", method= RequestMethod.POST)
+	@RequestMapping(value = "/save/{user_id}", method = RequestMethod.POST)
 	public Playlist savePlaylist(@RequestBody Playlist playlist, @PathVariable("user_id") long userId) {
 		return playlistServiceImpl.addPlaylist(playlistRepository.save(playlist), userId);
 	}
-	
-	@RequestMapping(value = "/add/{playlist_id}", method= RequestMethod.POST)
-	public void addPlaylist(@PathVariable("playlist_id") long playlistId , @RequestBody Track track) {
+
+	@RequestMapping(value = "/add/{playlist_id}", method = RequestMethod.POST)
+	public void addPlaylist(@PathVariable("playlist_id") long playlistId, @RequestBody Track track) {
 		Playlist playlist = playlistRepository.findById(playlistId);
 		playlist.getTracks().add(track);
 	}
-	
 
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Playlist getPlaylist(@PathVariable("id") long id) {
+		return playlistRepository.findById(id);
+	}
 }

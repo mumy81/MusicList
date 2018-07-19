@@ -25,5 +25,21 @@
 /.nb-gradle/
 
 /frontend/
-/vue-light/
+/frontend-ders/
+
+
+.DS_Store
+/vue-lightnode_modules/
+/vue-light/dist/
+/vue-light/npm-debug.log*
+/vue-light/yarn-debug.log*
+/vue-light/yarn-error.log*
+/vue-light/test/unit/coverage
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
 /frontend-ders/
